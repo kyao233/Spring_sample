@@ -11,4 +11,12 @@
 		<property name="name" value="HelloWorld!!!"></property>
 		
 	</bean>
+	
+	<bean id="OutputHelper" class="com.spring.Spring.output.OutputHelper">
+		<property name="gen" ref="JSONOutputGenerator"></property>
+	</bean>
+	
+	<bean id="CVSOutputGenerator" class="com.spring.Spring.output.CVSOutputGenerator"></bean>
+	<bean id="JSONOutputGenerator" class="com.spring.Spring.output.JSONOutputGenerator"></bean>
+	
 </beans>
