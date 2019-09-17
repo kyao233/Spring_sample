@@ -15,20 +15,30 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+
     /**
-     * Simple authentication config.
+     * Note: need to add @Bean to make this config work.
      * @return
-     * @throws Exception
      */
+    @Bean
     @Override
-    public UserDetailsService userDetailsService() {
+    protected UserDetailsService userDetailsService() {
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(User.withUsername("James").password("12345").roles("USER").build());
+        manager.createUser(User.withUsername("user").password("password").roles("USER").build());
+        manager.createUser(User.withUsername("admin").password("password").roles("USER","ADMIN").build());
         return manager;
     }
 
+    /**
+     * If this config doesn't work, try to clean and redeploy artifact.
+     * @param http
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.anonymous().and().formLogin().and().httpBasic();
+        http.authorizeRequests()
+                .antMatchers("/**").fullyAuthenticated()
+                .and()
+                .httpBasic();
     }
 }
