@@ -14,7 +14,7 @@ public class SpringSecurityWebAppInitializer extends AbstractAnnotationConfigDis
     @Override
     protected Class<?>[] getRootConfigClasses() {
         // GolfingAppConfig defines beans that would be in root-context.xml
-        return new Class<?>[] { RootConfig.class, WebSecurityConfig.class};
+        return new Class<?>[] { RootConfig.class};
     }
 
     @Override
