@@ -36,9 +36,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http.authorizeRequests()//this uri is based on contextpath
+                .antMatchers("/**/index").permitAll()
                 .antMatchers("/**").fullyAuthenticated()
                 .and()
-                .httpBasic();
+                .formLogin();
     }
 }
